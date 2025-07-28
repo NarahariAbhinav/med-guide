@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptoms page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="Symptoms.css">
+    
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand-logo">
+            <img src="/logo.png" alt="Logo">
+            <div class="brand-logo-name">CareBloom</div>
+        </a>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="menu-items">
+            <a href="/Homepage/home.html"><i class="fas fa-home"></i> Home</a>
+            <a href="/Aboutus/Aboutuspage.html"><i class="fas fa-info-circle"></i> About Us</a>
+            <a href="/Contactus/contact.html"><i class="fas fa-phone"></i> Contact Us</a>
+        </div>    
+    </nav>
+
+
+    <!-- Enhanced Symptom Checker -->
+    <div class="symptom-checker-advanced">
+        <div class="checker-header">
+            <h1 class="checker-title">Symptom Checker</h1>
+            <p class="checker-subtitle">Describe your symptoms and get personalized health information. Remember, this is not a diagnosis - always consult a healthcare professional for medical advice.</p>
+        </div>
+        
+        <div class="checker-steps">
+            <div class="step-line"></div>
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-text">Enter Symptoms</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-text">Add Details</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-text">Get Results</div>
+            </div>
+        </div>
+        
+        <!-- Step 1: Symptom Input -->
+        <div class="checker-content active" data-step-content="1">
+            <div class="symptom-input-section">
+                <div class="symptom-search-container">
+                    <input type="text" id="symptom-search" placeholder="Start typing your symptoms (e.g., headache, fever, nausea)">
+                    <div class="symptom-suggestions" id="symptom-suggestions"></div>
+                </div>
+                <div class="symptom-tags" id="symptom-tags"></div>
+            </div>
+            
+            <div class="common-symptoms">
+                <h3>Common Symptoms:</h3>
+                <div class="common-symptoms-list">
+                    <button class="common-symptom" data-symptom="Headache">Headache</button>
+                    <button class="common-symptom" data-symptom="Fever">Fever</button>
+                    <button class="common-symptom" data-symptom="Cough">Cough</button>
+                    <button class="common-symptom" data-symptom="Fatigue">Fatigue</button>
+                    <button class="common-symptom" data-symptom="Nausea">Nausea</button>
+                    <button class="common-symptom" data-symptom="Dizziness">Dizziness</button>
+                </div>
+            </div>
+            
+            <div class="checker-nav">
+                <button class="nav-button button-next" id="step1-next">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Symptom Details -->
+        <div class="checker-content" data-step-content="2">
+            <h3>Tell us more about your symptoms:</h3>
+            <div class="symptom-details-container" id="symptom-details-container">
+                <!-- Dynamically generated symptom cards will appear here -->
+            </div>
+            
+            <div class="checker-nav">
+                <button class="nav-button button-back" id="step2-back">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="nav-button button-next" id="step2-next">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Results -->
+        <div class="checker-content" data-step-content="3">
+            <div class="results-container" id="results-container">
+                <div class="results-header">
+                    <h2 class="results-title">Your Symptom Analysis</h2>
+                    <p class="results-subtitle">Based on the symptoms you provided, here are some possible conditions</p>
+                </div>
+                
+                <div id="condition-results">
+                    <!-- Condition cards will be inserted here -->
+                </div>
+                
+                <div class="recommendation-card">
+                    <h3 class="recommendation-title"><i class="fas fa-stethoscope"></i> Recommended Action</h3>
+                    <p class="recommendation-text" id="recommendation-text">
+                        <!-- Recommendation will be inserted here -->
+                    </p>
+                </div>
+                
+                <div class="warning-card">
+                    <h3 class="warning-title"><i class="fas fa-exclamation-triangle"></i> When to Seek Immediate Care</h3>
+                    <p class="warning-text">
+                        Seek emergency medical attention if you experience: difficulty breathing, chest pain, severe headache with fever, sudden dizziness or confusion, or any other severe symptoms.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="checker-nav">
+                <button class="nav-button button-back" id="step3-back">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="nav-button button-submit" id="start-over">
+                    <i class="fas fa-redo"></i> Start Over
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="boxes-container">
+        <div class="big-box">
+            Select Symptoms
+        </div>
+        <div class="boxes">
+            <a href="/Healthpage/Fever/Fever.html" class="box">
+                <img src="Fever.png" alt="Image">
+                <div class="box-name">Fever</div>
+            </a>
+            <a href="/Healthpage/Cough/cough.html" class="box">
+                <img src="cough.png" alt="Image">
+                <div class="box-name">Cough</div>
+            </a>
+            <a href="/Healthpage/Cold/cold.html" class="box">
+                <img src="cold.png" alt="Image">
+                <div class="box-name">Cold</div>
+            </a>
+            <a href="/Healthpage/Stomachpain/stomach.html" class="box">
+                <img src="stomach pain.png" alt="Image">
+                <div class="box-name">Stomach Pain</div>
+            </a>
+            <a href="/Healthpage/Headache/Headache.html" class="box">
+                <img src="headache.png" alt="Image">
+                <div class="box-name">Headache</div>
+            </a>
+            <a href="/Healthpage/Motions/motions.html" class="box">
+                <img src="motions.png" alt="Image">
+                <div class="box-name">Motions</div>
+            </a>
+            <a href="/Healthpage/Eyeproblems/eyeprlbm.html" class="box">
+                <img src="eye problems.png" alt="Image">
+                <div class="box-name">Eye problems</div>
+            </a>
+            <a href="/Healthpage/Nose/nose.html" class="box">
+                <img src="nose infections.png" alt="Image">
+                <div class="box-name">Nose problems</div>
+            </a>
+            <a href="/Healthpage/Mouth/mouthprblm.html" class="box">
+                <img src="mouth problems.png" alt="Image">
+                <div class="box-name">Mouth related Problems</div>
+            </a>
+            <a href="/Healthpage/Vomiting/vomitings.html" class="box">
+                <img src="vomitings.png" alt="Image">
+                <div class="box-name">Vomitings</div>
+            </a>
+            <a href="/Healthpage/Throatpain/throatpain.html" class="box">
+                <img src="throat issues.png" alt="Image">
+                <div class="box-name">Throat Pain</div>
+            </a>
+            <a href="/Healthpage/swelling/swellings.html" class="box">
+                <img src="swellings.png" alt="Image">
+                <div class="box-name">Swellings</div>
+            </a>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Visit Here</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Carebloom. All rights reserved.
+        </div>
+    </footer>
+    <script>
+        // Symptom database (in a real app, this would come from an API)
+        const symptomDatabase = [
+            "Headache", "Fever", "Cough", "Fatigue", "Nausea", "Dizziness",
+            "Sore throat", "Runny nose", "Chest pain", "Shortness of breath",
+            "Abdominal pain", "Diarrhea", "Vomiting", "Muscle pain",
+            "Joint pain", "Rash", "Chills", "Sweating", "Loss of appetite",
+            "Weight loss", "Difficulty swallowing", "Heart palpitations",
+            "Back pain", "Neck pain", "Blurred vision", "Drowsiness"
+        ];
+        
+        // Condition database with symptoms and descriptions
+        const conditionsDatabase = [
+            {
+                name: "Common Cold",
+                description: "A viral infection of your nose and throat (upper respiratory tract). It's usually harmless, although it might not feel that way.",
+                symptoms: ["Headache", "Runny nose", "Sore throat", "Cough", "Sneezing"],
+                recommendation: "Rest, drink fluids, and use over-the-counter cold medicines to relieve symptoms. Should improve in 7-10 days.",
+                urgency: "low"
+            },
+            {
+                name: "Influenza (Flu)",
+                description: "A viral infection that attacks your respiratory system — your nose, throat and lungs.",
+                symptoms: ["Fever", "Muscle pain", "Chills", "Headache", "Fatigue", "Cough"],
+                recommendation: "Rest and hydration are important. Antiviral drugs may help if taken early. See a doctor if symptoms are severe.",
+                urgency: "medium"
+            },
+            {
+                name: "Migraine",
+                description: "A headache that can cause severe throbbing pain or a pulsing sensation, usually on one side of the head.",
+                symptoms: ["Headache", "Nausea", "Dizziness", "Blurred vision"],
+                recommendation: "Rest in a quiet, dark room. Over-the-counter pain relievers may help. Consult a doctor for frequent or severe migraines.",
+                urgency: "medium"
+            },
+            {
+                name: "Gastroenteritis",
+                description: "An intestinal infection marked by diarrhea, cramps, nausea or vomiting.",
+                symptoms: ["Abdominal pain", "Diarrhea", "Nausea", "Vomiting", "Fever"],
+                recommendation: "Stay hydrated with clear fluids. Eat bland foods as tolerated. See a doctor if symptoms persist more than 2 days.",
+                urgency: "medium"
+            }
+        ];
+        
+        // DOM Elements
+        const symptomSearch = document.getElementById('symptom-search');
+        const symptomSuggestions = document.getElementById('symptom-suggestions');
+        const symptomTags = document.getElementById('symptom-tags');
+        const stepContents = document.querySelectorAll('[data-step-content]');
+        const steps = document.querySelectorAll('.step');
+        const step1Next = document.getElementById('step1-next');
+        const step2Back = document.getElementById('step2-back');
+        const step2Next = document.getElementById('step2-next');
+        const step3Back = document.getElementById('step3-back');
+        const startOver = document.getElementById('start-over');
+        const symptomDetailsContainer = document.getElementById('symptom-details-container');
+        const conditionResults = document.getElementById('condition-results');
+        const recommendationText = document.getElementById('recommendation-text');
+        
+        // State
+        let selectedSymptoms = [];
+        let symptomDetails = {};
+        
+        // Event Listeners
+        symptomSearch.addEventListener('input', handleSymptomSearch);
+        symptomSearch.addEventListener('focus', showSuggestions);
+        document.addEventListener('click', hideSuggestions);
+        step1Next.addEventListener('click', goToStep2);
+        step2Back.addEventListener('click', goToStep1);
+        step2Next.addEventListener('click', goToStep3);
+        step3Back.addEventListener('click', goToStep2);
+        startOver.addEventListener('click', resetChecker);
+        
+        // Common symptoms buttons
+        document.querySelectorAll('.common-symptom').forEach(button => {
+            button.addEventListener('click', () => {
+                const symptom = button.getAttribute('data-symptom');
+                addSymptom(symptom);
+            });
+        });
+        
+        // Functions
+        function handleSymptomSearch(e) {
+            const value = e.target.value.toLowerCase();
+            if (value.length < 2) {
+                symptomSuggestions.style.display = 'none';
+                return;
+            }
+            
+            const matches = symptomDatabase.filter(symptom => 
+                symptom.toLowerCase().includes(value)
+            );
+            
+            displaySuggestions(matches);
+        }
+        
+        function displaySuggestions(matches) {
+            if (matches.length === 0) {
+                symptomSuggestions.style.display = 'none';
+                return;
+            }
+            
+            symptomSuggestions.innerHTML = '';
+            matches.slice(0, 8).forEach(match => {
+                const item = document.createElement('div');
+                item.className = 'suggestion-item';
+                item.textContent = match;
+                item.addEventListener('click', () => {
+                    addSymptom(match);
+                    symptomSearch.value = '';
+                    symptomSuggestions.style.display = 'none';
+                });
+                symptomSuggestions.appendChild(item);
+            });
+            
+            symptomSuggestions.style.display = 'block';
+        }
+        
+        function showSuggestions() {
+            if (symptomSearch.value.length >= 2) {
+                symptomSuggestions.style.display = 'block';
+            }
+        }
+        
+        function hideSuggestions(e) {
+            if (e.target !== symptomSearch) {
+                symptomSuggestions.style.display = 'none';
+            }
+        }
+        
+        function addSymptom(symptom) {
+            if (!selectedSymptoms.includes(symptom)) {
+                selectedSymptoms.push(symptom);
+                updateSymptomTags();
+            }
+        }
+        
+        function removeSymptom(symptom) {
+            selectedSymptoms = selectedSymptoms.filter(s => s !== symptom);
+            updateSymptomTags();
+        }
+        
+        function updateSymptomTags() {
+            symptomTags.innerHTML = '';
+            selectedSymptoms.forEach(symptom => {
+                const tag = document.createElement('div');
+                tag.className = 'symptom-tag';
+                tag.innerHTML = `
+                    ${symptom}
+                    <span class="symptom-tag-remove" data-symptom="${symptom}">
+                        <i class="fas fa-times"></i>
+                    </span>
+                `;
+                symptomTags.appendChild(tag);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.symptom-tag-remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const symptom = btn.getAttribute('data-symptom');
+                    removeSymptom(symptom);
+                });
+            });
+        }
+        
+        function goToStep2() {
+            if (selectedSymptoms.length === 0) {
+                alert('Please add at least one symptom');
+                return;
+            }
+            
+            // Generate symptom detail cards
+            symptomDetailsContainer.innerHTML = '';
+            selectedSymptoms.forEach(symptom => {
+                const card = document.createElement('div');
+                card.className = 'symptom-card';
+                card.innerHTML = `
+                    <div class="symptom-card-header">
+                        <div class="symptom-name">${symptom}</div>
+                        <div class="symptom-remove" data-symptom="${symptom}">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <label class="detail-label">Duration</label>
+                        <div class="detail-controls">
+                            <select class="duration-select" data-symptom="${symptom}">
+                                <option value="">Select duration</option>
+                                <option value="less-than-day">Less than a day</option>
+                                <option value="1-2-days">1-2 days</option>
+                                <option value="3-7-days">3-7 days</option>
+                                <option value="1-2-weeks">1-2 weeks</option>
+                                <option value="more-than-2-weeks">More than 2 weeks</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <label class="detail-label">Severity</label>
+                        <div class="detail-controls">
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="${symptom}-mild" name="${symptom}-severity" value="mild" data-symptom="${symptom}">
+                                    <label for="${symptom}-mild">Mild</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="${symptom}-moderate" name="${symptom}-severity" value="moderate" data-symptom="${symptom}">
+                                    <label for="${symptom}-moderate">Moderate</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="${symptom}-severe" name="${symptom}-severity" value="severe" data-symptom="${symptom}">
+                                    <label for="${symptom}-severe">Severe</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                symptomDetailsContainer.appendChild(card);
+            });
+            
+            // Add event listeners to remove buttons in cards
+            document.querySelectorAll('.symptom-remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const symptom = btn.getAttribute('data-symptom');
+                    removeSymptom(symptom);
+                    goToStep2(); // Refresh the view
+                });
+            });
+            
+            // Update UI
+            updateStep(2);
+        }
+        
+        function goToStep1() {
+            updateStep(1);
+        }
+        
+        function goToStep3() {
+            // Collect symptom details
+            symptomDetails = {};
+            selectedSymptoms.forEach(symptom => {
+                const duration = document.querySelector(`.duration-select[data-symptom="${symptom}"]`).value;
+                const severity = document.querySelector(`input[name="${symptom}-severity"]:checked`)?.value;
+                
+                if (!duration || !severity) {
+                    alert(`Please provide details for ${symptom}`);
+                    return;
+                }
+                
+                symptomDetails[symptom] = {
+                    duration,
+                    severity
+                };
+            });
+            
+            // Analyze symptoms (in a real app, this would call an API)
+            const matchedConditions = analyzeSymptoms(selectedSymptoms, symptomDetails);
+            
+            // Display results
+            displayResults(matchedConditions);
+            
+            // Update UI
+            updateStep(3);
+        }
+        
+        function analyzeSymptoms(symptoms, details) {
+            // Simple matching algorithm (in a real app, this would be much more sophisticated)
+            return conditionsDatabase
+                .map(condition => {
+                    // Calculate match score
+                    const matchingSymptoms = condition.symptoms.filter(s => symptoms.includes(s));
+                    const missingSymptoms = condition.symptoms.filter(s => !symptoms.includes(s));
+                    const score = matchingSymptoms.length / condition.symptoms.length;
+                    
+                    return {
+                        ...condition,
+                        matchingSymptoms,
+                        missingSymptoms,
+                        score
+                    };
+                })
+                .filter(condition => condition.score >= 0.3) // At least 30% match
+                .sort((a, b) => b.score - a.score);
+        }
+        
+        function displayResults(conditions) {
+            conditionResults.innerHTML = '';
+            
+            if (conditions.length === 0) {
+                conditionResults.innerHTML = `
+                    <div class="condition-card">
+                        <p>No specific conditions matched your symptoms well. This could be due to mild or non-specific symptoms.</p>
+                    </div>
+                `;
+                recommendationText.textContent = "Monitor your symptoms. If they persist or worsen, consider consulting a healthcare provider.";
+                return;
+            }
+            
+            conditions.forEach(condition => {
+                const card = document.createElement('div');
+                card.className = 'condition-card';
+                
+                const probabilityPercent = Math.round(condition.score * 100);
+                let probabilityText = '';
+                if (probabilityPercent > 70) probabilityText = 'High probability';
+                else if (probabilityPercent > 40) probabilityText = 'Moderate probability';
+                else probabilityText = 'Low probability';
+                
+                card.innerHTML = `
+                    <div class="condition-header">
+                        <div class="condition-name">${condition.name}</div>
+                        <div class="condition-probability" title="${probabilityText}">${probabilityPercent}% match</div>
+                    </div>
+                    <div class="condition-details">
+                        <p class="condition-description">${condition.description}</p>
+                        
+                        ${condition.matchingSymptoms.length > 0 ? `
+                            <div class="condition-matches">
+                                <i class="fas fa-check-circle"></i>
+                                Matching symptoms: 
+                                <div class="condition-symptoms">
+                                    ${condition.matchingSymptoms.map(s => `<span class="condition-symptom">${s}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${condition.missingSymptoms.length > 0 ? `
+                            <div class="condition-missing">
+                                <i class="fas fa-info-circle"></i>
+                                Other common symptoms you don't have: 
+                                <div class="condition-symptoms">
+                                    ${condition.missingSymptoms.map(s => `<span class="condition-symptom">${s}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                conditionResults.appendChild(card);
+            });
+            
+            // Determine overall recommendation based on highest urgency condition
+            const highestUrgency = conditions.reduce((max, condition) => {
+                const urgencies = { low: 1, medium: 2, high: 3 };
+                return urgencies[condition.urgency] > urgencies[max] ? condition.urgency : max;
+            }, 'low');
+            
+            if (highestUrgency === 'high') {
+                recommendationText.textContent = "Based on your symptoms, you should seek medical attention soon. Some of your symptoms may require prompt evaluation by a healthcare provider.";
+            } else if (highestUrgency === 'medium') {
+                recommendationText.textContent = "Consider consulting a healthcare provider if symptoms persist or worsen. Most of these conditions improve with self-care, but medical advice may be helpful.";
+            } else {
+                recommendationText.textContent = "Your symptoms suggest a mild condition that can likely be managed with self-care. Monitor your symptoms and consult a doctor if they persist or worsen.";
+            }
+        }
+        
+        function updateStep(stepNumber) {
+            // Update step indicators
+            steps.forEach(step => {
+                if (parseInt(step.getAttribute('data-step')) <= stepNumber) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+            
+            // Update content visibility
+            stepContents.forEach(content => {
+                if (content.getAttribute('data-step-content') === stepNumber.toString()) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+        
+        function resetChecker() {
+            selectedSymptoms = [];
+            symptomDetails = {};
+            symptomSearch.value = '';
+            symptomTags.innerHTML = '';
+            updateStep(1);
+        }
+    </script>
+</body>
+</html>

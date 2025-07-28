@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContactUs page</title>
+    <meta name="description" content="A handy study of animated navigation">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="contact.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="Home.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand-logo">
+            <img src="/logo.png" alt="Logo">
+            <div class="brand-logo-name">CareBloom</div>
+        </a>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="menu-items">
+            <a href="/Homepage/home.html"><i class="fas fa-home"></i> Home</a>
+            <a href="/Aboutus/Aboutuspage.html"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/Contactus/contact.html"><i class="fas fa-phone"></i> Contact Us</a>
+        </div> 
+    </nav>
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen-header">
+                <div class="screen-header-left">
+                    <div class="screen-header-button close"></div>
+                    <div class="screen-header-button maximize"></div>
+                    <div class="screen-header-button minimize"></div>
+                </div>
+                <div class="screen-header-right">
+                    <div class="screen-header-ellipsis"></div>
+                    <div class="screen-header-ellipsis"></div>
+                    <div class="screen-header-ellipsis"></div>
+                </div>
+            </div>
+            <div class="screen-body">
+                <div class="screen-body-item left">
+                    <div class="app-title">
+                        <span>CONTACT</span>
+                        <span>US</span>
+                    </div>
+                </div>
+                <div class="screen-body-item">
+                    <div class="app-form">
+                        <div class="app-form-group">
+                            <input id="nameInput" class="app-form-control" placeholder="NAME">
+                            <span id="nameError" class="error"></span>
+                        </div>
+                        <div class="app-form-group">
+                            <input id="emailInput" class="app-form-control" placeholder="EMAIL">
+                            <span id="emailError" class="error"></span>
+                        </div>
+                        <div class="app-form-group">
+                            <input id="contactInput" class="app-form-control" placeholder="CONTACT NO">
+                            <span id="contactError" class="error"></span>
+                        </div>
+                        <div class="app-form-group message">
+                            <input id="messageInput" class="app-form-control" placeholder="MESSAGE">
+                            <span id="messageError" class="error"></span>
+                        </div>
+                        <div class="app-form-group buttons">
+                            <button class="app-form-button" onclick="clearForm()">CANCEL</button>
+                            <button class="app-form-button" onclick="validateForm()">SEND</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function clearForm() {
+            document.getElementById('nameInput').value = '';
+            document.getElementById('emailInput').value = '';
+            document.getElementById('contactInput').value = '';
+            document.getElementById('messageInput').value = '';
+            clearErrors();
+        }
+
+        function clearErrors() {
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('contactError').textContent = '';
+            document.getElementById('messageError').textContent = '';
+        }
+
+        function validateForm() {
+    clearErrors();
+    var nameInput = document.getElementById('nameInput').value;
+    var emailInput = document.getElementById('emailInput').value;
+    var contactInput = document.getElementById('contactInput').value;
+    var messageInput = document.getElementById('messageInput').value;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var contactRegex = /^\d{10}$/;
+
+    if (nameInput.trim() === '') {
+        document.getElementById('nameError').textContent = 'Please enter your name';
+        return;
+    }
+
+    if (!emailRegex.test(emailInput)) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email';
+        return;
+    }
+
+    if (!contactRegex.test(contactInput)) {
+        document.getElementById('contactError').textContent = 'Please enter a 10-digit contact number';
+        return;
+    }
+
+    if (messageInput.trim() === '') {
+        document.getElementById('messageError').textContent = 'Please enter your message';
+        return;
+    }
+
+    // Display sent successfully message
+    var sentMessage = document.createElement('div');
+    sentMessage.textContent = 'Message sent successfully!';
+    sentMessage.classList.add('sent-message');
+    document.querySelector('.screen').appendChild(sentMessage);
+    setTimeout(function() {
+        sentMessage.classList.add('hide');
+        setTimeout(function() {
+            sentMessage.remove();
+        }, 1000);
+    }, 3000);
+}
+
+
+    </script>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Visit Here</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Carebloom. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

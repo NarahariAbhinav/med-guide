@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swelling page</title>
+    <meta name="description" content="A handy study of animated navigation">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="swellings.css">
+    <style>
+        /* Style for the pop-up image */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    text-align: center;
+}
+
+.popup img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Add some margin at the top for better visibility */
+    transition: all 0.3s ease; /* Smooth transition for the image */
+}
+
+.popup button {
+    background-color: #33bc33;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px; /* Add margin between image and button */
+    transition: all 0.3s ease; /* Smooth transition for the button */
+    position: absolute;
+    bottom: 20px; /* Position the button at the bottom */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Center the button horizontally */
+    z-index: 100; /* Ensure the button is above the image */
+}
+
+/* Animation for the pop-up */
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Style for the visible pop-up */
+.popup.visible {
+    display: block;
+}
+
+.popup.visible img {
+    margin-top: 20px; /* Adjust margin for better visibility */
+}
+
+.popup.visible button {
+    margin-top: 20px; /* Adjust margin for better visibility */
+}
+
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover; /* Ensure the video covers the entire container */
+            filter: blur(5px); /* Add blur effect to the video */
+        }
+
+        /* Text overlay */
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            text-align: center;
+            color: #E19898;
+            opacity: 0; /* Start with 0 opacity */
+            transition: opacity 0.5s; /* Smooth fade-in transition */
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Show text overlay when video is hovered */
+        .video-container:hover .text-overlay {
+            opacity: 1;
+        }
+
+        /* Text styling */
+        .text-overlay h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .text-overlay p {
+            font-size: 1.5em;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand-logo">
+            <img src="/logo.png" alt="Logo">
+            <div class="brand-logo-name">CareBloom</div>
+        </a>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="menu-items">
+            <a href="home.html"><i class="fas fa-home"></i> Home</a>
+            <a href="/Aboutus/Aboutuspage.html"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/Contactus/contact.html"><i class="fas fa-phone"></i> Contact Us</a>
+        </div>   
+    </nav>
+
+    <section class="video-container">
+        <video autoplay muted loop>
+            <source src="swellingvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="text-overlay">
+            <h1>swelling</h1>
+            <p>Check Your prescription by selecting your age</p>
+        </div>
+    </section>
+
+    <div class="age-container">
+        <h3>Select Your Age Group</h3>
+        <div class="age-groups">
+            <button id="age-0-12" onclick="updateFeverContent('0-12')">0-12 months</button>
+            <button id="age-1-5" onclick="updateFeverContent('1-5')">1-5 years</button>
+            <button id="age-5-18" onclick="updateFeverContent('5-18')">5-18 years</button>
+            <button id="age-above-18" onclick="updateFeverContent('above-18')">Above 18</button>
+            <button id="age-25-50" onclick="updateFeverContent('25-50')">25-50 years</button>
+            <button id="age-50-and-above" onclick="updateFeverContent('50-and-above')">50 and above</button>
+        </div>
+    </div>
+
+    <section class="fever-container">
+        <div class="fever-section" style="display: none;">
+            <!-- Content of fever section will be dynamically updated -->
+            <button id="send-prescription">Send Prescription to Email</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Visit Here</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Carebloom. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        function updateFeverContent(ageGroup) {
+            let feverSection = document.querySelector('.fever-section');
+    
+            // Update content based on age group
+            switch (ageGroup) {
+                case '0-12':
+                    feverSection.innerHTML = `
+                        <h2>Fever in 0-12 months</h2>
+                        <p>Content for 0-12 months</p>
+                        <img src="0to1fever.png" alt="0-12 months">
+                    `;
+                    break;
+                case '1-5':
+                    feverSection.innerHTML = `
+                        <h2>Fever in 1-5 years</h2>
+                        <p>Content for 1-5 years</p>
+                        <img src="path/to/1-5-image.jpg" alt="1-5 years">
+                    `;
+                    break;
+                case '5-18':
+                    feverSection.innerHTML = `
+                        <h2>Fever in 5-18 years</h2>
+                        <p>Content for 5-18 years</p>
+                        <img src="path/to/5-18-image.jpg" alt="5-18 years">
+                    `;
+                    break;
+                case 'above-18':
+                    feverSection.innerHTML = `
+                        <h2>Fever above 18 years</h2>
+                        <p>Content for above 18 years</p>
+                        <img src="path/to/above-18-image.jpg" alt="Above 18 years">
+                    `;
+                    break;
+                case '25-50':
+                    feverSection.innerHTML = `
+                        <h2>Fever in 25-50 years</h2>
+                        <p>Content for 25-50 years</p>
+                        <img src="path/to/25-50-image.jpg" alt="25-50 years">
+                    `;
+                    break;
+                case '50-and-above':
+                    feverSection.innerHTML = `
+                        <h2>Fever in 50 and above</h2>
+                        <p>Content for 50 and above</p>
+                        <img src="path/to/50-and-above-image.jpg" alt="50 and above">
+                    `;
+                    break;
+            }
+    
+            // Show the fever section
+            feverSection.style.display = 'block';
+    
+            // Add event listener for the send prescription button
+            document.getElementById('send-prescription').addEventListener('click', function() {
+                // Replace the email with the user's email or remove this line if you don't have user's email
+                let userEmail = 'user@example.com';
+                sendPrescription(userEmail);
+            });
+        }
+    
+        function sendPrescription(userEmail) {
+            // Use JavaScript to send the prescription to the user's email
+            // You can use a library like EmailJS or a server-side script to send the email
+            // For demonstration purposes, we'll just log a message to the console
+            console.log('Sending prescription to ' + userEmail);
+        }
+    </script>
+</body>
+</html>

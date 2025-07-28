@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personalized diet plans and nutrition advice">
+    <title>Diet page</title>
+    <!-- Use only one Font Awesome version -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="diet.css">
+    <style>
+        .weekly-plan {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .day-plan {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .day-plan h4 {
+            color: #2c3e50;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .meal-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .meal-time {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .time-icon {
+            font-size: 20px;
+            min-width: 30px;
+        }
+
+        .plan-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @media print {
+            .weekly-plan {
+                max-height: none;
+                overflow: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand-logo">
+            <img src="/logo.png" alt="Logo">
+            <div class="brand-logo-name">CareBloom</div>
+        </a>
+        <div class="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="menu-items">
+            <a href="/Homepage/home.html"><i class="fas fa-home"></i> Home</a>
+            <a href="/Aboutus/Aboutuspage.html"><i class="fas fa-info-circle"></i> About Us</a>
+            <a href="/Contactus/contact.html"><i class="fas fa-phone"></i> Contact Us</a>
+        </div>    
+    </nav>
+    
+        <!-- Quote Section -->
+    <div class="container">
+        <div class="quote-section animate-in">
+            <div class="quote">
+                "Your diet is a bank account. Good food choices are good investments."
+            </div>
+        </div>
+
+        <!-- Smart Diet Goal Selector -->
+        <section class="section animate-in">
+            <h2 class="section-title">🎯 Weekly Diet Plan Selector</h2>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <span class="goal-icon">⚡</span>
+                    <h3 class="goal-title">Weight Loss</h3>
+                    <p class="goal-description">1500-1800 cal/day with balanced Indian meals</p>
+                    <button class="btn-primary" onclick="selectGoal('Weight Loss')">View Weekly Plan</button>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">💪</span>
+                    <h3 class="goal-title">Weight Gain</h3>
+                    <p class="goal-description">2500-3000 cal/day protein-rich Indian diet</p>
+                    <button class="btn-primary" onclick="selectGoal('Weight Gain')">View Weekly Plan</button>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">🩺</span>
+                    <h3 class="goal-title">Diabetic-Friendly</h3>
+                    <p class="goal-description">Low GI Indian meals with portion control</p>
+                    <button class="btn-primary" onclick="selectGoal('Diabetic-Friendly')">View Weekly Plan</button>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">❤️</span>
+                    <h3 class="goal-title">Heart-Healthy</h3>
+                    <p class="goal-description">Low-sodium Indian dishes with healthy fats</p>
+                    <button class="btn-primary" onclick="selectGoal('Heart-Healthy')">View Weekly Plan</button>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">🌱</span>
+                    <h3 class="goal-title">Vegetarian</h3>
+                    <p class="goal-description">Traditional Indian vegetarian weekly menu</p>
+                    <button class="btn-primary" onclick="selectGoal('Vegetarian')">View Weekly Plan</button>
+                </div>
+                <div class="goal-card">
+                    <span class="goal-icon">🥗</span>
+                    <h3 class="goal-title">Balanced Diet</h3>
+                    <p class="goal-description">Complete 7-day Indian thali-style meals</p>
+                    <button class="btn-primary" onclick="selectGoal('Balanced Diet')">View Weekly Plan</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Drag & Drop Meal Planner -->
+        <section class="section animate-in">
+            <h2 class="section-title">📋 Drag & Drop Meal Planner</h2>
+            <div class="meal-planner">
+                <div class="meal-panel">
+                    <h3 class="panel-title">Available Indian Meals</h3>
+                    <div class="meal-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="veg">Vegetarian</button>
+                        <button class="filter-btn" data-filter="non-veg">Non-Vegetarian</button>
+                    </div>
+                    
+                    <div class="meal-category">
+                        <h4>🌅 Breakfast Options</h4>
+                        <div class="meal-item" draggable="true" data-calories="250" data-type="veg">
+                            <span>🥘 Masala Dosa</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">250 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="180" data-type="veg">
+                            <span>🥣 Idli Sambar</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">180 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="320" data-type="veg">
+                            <span>🫓 Aloo Paratha</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">320 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="220" data-type="veg">
+                            <span>🥣 Upma</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">220 cal</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="meal-category">
+                        <h4>🌞 Lunch Options</h4>
+                        <div class="meal-item" draggable="true" data-calories="450" data-type="veg">
+                            <span>🍛 Dal Makhani with Roti</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">450 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="380" data-type="non-veg">
+                            <span>� Butter Chicken with Naan</span>
+                            <span class="meal-info">
+                                <span class="non-veg-icon">🔴</span>
+                                <span class="calories">380 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="340" data-type="veg">
+                            <span>🍚 Veg Biryani</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">340 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="420" data-type="non-veg">
+                            <span>🍖 Chicken Biryani</span>
+                            <span class="meal-info">
+                                <span class="non-veg-icon">🔴</span>
+                                <span class="calories">420 cal</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="meal-category">
+                        <h4>🌅 Evening Snacks</h4>
+                        <div class="meal-item" draggable="true" data-calories="150" data-type="veg">
+                            <span>🥟 Samosa</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">�</span>
+                                <span class="calories">150 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="120" data-type="veg">
+                            <span>🥮 Dhokla</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">120 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="180" data-type="veg">
+                            <span>� Bhel Puri</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">180 cal</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="meal-category">
+                        <h4>🌙 Dinner Options</h4>
+                        <div class="meal-item" draggable="true" data-calories="280" data-type="veg">
+                            <span>🥘 Palak Paneer with Roti</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">280 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="320" data-type="non-veg">
+                            <span>🐠 Fish Curry with Rice</span>
+                            <span class="meal-info">
+                                <span class="non-veg-icon">🔴</span>
+                                <span class="calories">320 cal</span>
+                            </span>
+                        </div>
+                        <div class="meal-item" draggable="true" data-calories="250" data-type="veg">
+                            <span>🥘 Chole Bhature</span>
+                            <span class="meal-info">
+                                <span class="veg-icon">🟢</span>
+                                <span class="calories">250 cal</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="meal-panel">
+                    <h3 class="panel-title">Your Meal Plan</h3>
+                    <div class="meal-slot" data-meal="breakfast">
+                        <div class="meal-slot-title">Breakfast</div>
+                        <div>Drop breakfast items here</div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch">
+                        <div class="meal-slot-title">Lunch</div>
+                        <div>Drop lunch items here</div>
+                    </div>
+                    <div class="meal-slot" data-meal="snacks">
+                        <div class="meal-slot-title">Snacks</div>
+                        <div>Drop snacks here</div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner">
+                        <div class="meal-slot-title">Dinner</div>
+                        <div>Drop dinner items here</div>
+                    </div>
+                    <div class="nutrition-info">
+                        <strong>Total Calories: <span id="totalCalories">0</span></strong>
+                    </div>
+                    <div class="planner-actions">
+                        <button class="btn-primary" onclick="savePlan()">Save Plan</button>
+                        <button class="btn-primary" onclick="downloadPDF()">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Diet Tips Carousel -->
+        <section class="section animate-in">
+            <h2 class="section-title">💡 Daily Diet Tips</h2>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="tip-card">
+                        <div class="tip-emoji">💧</div>
+                        <div class="tip-text">Drink 3L of water daily for optimal hydration</div>
+                        <button class="btn-primary" onclick="saveTip(this)">Save Tip</button>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-emoji">🍎</div>
+                        <div class="tip-text">Eat 5 servings of fruits and vegetables daily</div>
+                        <button class="btn-primary" onclick="saveTip(this)">Save Tip</button>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-emoji">🥜</div>
+                        <div class="tip-text">Include nuts and seeds for healthy fats</div>
+                        <button class="btn-primary" onclick="saveTip(this)">Save Tip</button>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-emoji">🐟</div>
+                        <div class="tip-text">Fish twice a week for omega-3 fatty acids</div>
+                        <button class="btn-primary" onclick="saveTip(this)">Save Tip</button>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-emoji">🍫</div>
+                        <div class="tip-text">Limit processed foods and added sugars</div>
+                        <button class="btn-primary" onclick="saveTip(this)">Save Tip</button>
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <button class="nav-btn" onclick="prevTip()">‹</button>
+                    <button class="nav-btn" onclick="nextTip()">›</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nutrition Chat -->
+        <section class="section animate-in">
+            <h2 class="section-title">💬 Ask Our Nutrition Expert</h2>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-avatar">🩺</div>
+                    <div>
+                        <strong>Dr. Nutritionist</strong>
+                        <div style="font-size: 12px; color: var(--text-light);">Online now</div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" placeholder="Ask about nutrition, diet plans, or healthy recipes..." id="chatInput">
+                    <button class="btn-primary" onclick="sendMessage()">Send</button>
+                </div>
+                <div class="faq-section">
+                    <h4 style="margin-bottom: 12px;">Frequently Asked Questions:</h4>
+                    <div class="faq-item" onclick="askQuestion('How much protein do I need daily?')">
+                        How much protein do I need daily?
+                    </div>
+                    <div class="faq-item" onclick="askQuestion('What are the best foods for weight loss?')">
+                        What are the best foods for weight loss?
+                    </div>
+                    <div class="faq-item" onclick="askQuestion('How to meal prep for the week?')">
+                        How to meal prep for the week?
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Help Button -->
+    <button class="help-btn" onclick="toggleHelp()">
+        Need Help? 🤔
+    </button>
+    
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Visit Here</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Carebloom. All rights reserved.
+        </div>
+    </footer>
+    <script>
+        let currentTipIndex = 0;
+        let totalCalories = 0;
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-toggle');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                button.textContent = '🌙 Dark Mode';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                button.textContent = '☀️ Light Mode';
+            }
+        }
+
+        // Goal Selection
+        function selectGoal(goal) {
+            const planDetails = getDietPlan(goal);
+            showDietPlanModal(goal, planDetails);
+        }
+
+        function getDietPlan(goal) {
+            const plans = {
+                'Weight Loss': {
+                    calories: '1500-1800',
+                    weeklyPlan: {
+                        monday: {
+                            breakfast: 'Masala Oats with Milk',
+                            lunch: 'Dal Khichdi with Raita',
+                            dinner: 'Grilled Fish Curry with Brown Rice',
+                            snacks: 'Sprouts Chaat, Buttermilk'
+                        },
+                        tuesday: {
+                            breakfast: 'Ragi Dosa with Sambar',
+                            lunch: 'Mixed Vegetable Curry with Chapati',
+                            dinner: 'Tandoori Chicken with Mint Chutney',
+                            snacks: 'Roasted Makhana, Green Tea'
+                        },
+                        wednesday: {
+                            breakfast: 'Besan Cheela with Mint Chutney',
+                            lunch: 'Rajma Curry with Brown Rice',
+                            dinner: 'Baked Fish with Stir-fried Vegetables',
+                            snacks: 'Fruit Yogurt, Almonds'
+                        },
+                        thursday: {
+                            breakfast: 'Upma with Vegetables',
+                            lunch: 'Chicken Tikka with Salad',
+                            dinner: 'Palak Dal with Roti',
+                            snacks: 'Dhokla, Lemon Tea'
+                        },
+                        friday: {
+                            breakfast: 'Mixed Vegetable Poha',
+                            lunch: 'Egg Curry with Brown Rice',
+                            dinner: 'Mixed Dal with Chapati',
+                            snacks: 'Roasted Chana, Coconut Water'
+                        },
+                        saturday: {
+                            breakfast: 'Vegetable Idli with Sambar',
+                            lunch: 'Grilled Chicken with Quinoa',
+                            dinner: 'Vegetable Curry with Millet Roti',
+                            snacks: 'Vegetable Soup, Mixed Seeds'
+                        },
+                        sunday: {
+                            breakfast: 'Multigrain Dosa with Chutney',
+                            lunch: 'Fish Curry with Brown Rice',
+                            dinner: 'Tofu Bhurji with Roti',
+                            snacks: 'Fresh Fruit Salad, Green Tea'
+                        }
+                    },
+                    recommended: ['Local seasonal vegetables', 'Whole grain Indian breads', 'Lean proteins', 'Low-fat dairy'],
+                    avoid: ['Fried snacks', 'Sweet dishes', 'Regular rice', 'Full-fat curries'],
+                    exercise: ['30 minutes morning walk', 'Yoga', 'Light strength training']
+                },
+                'Weight Gain': {
+                    calories: '2500-3000',
+                    weeklyPlan: {
+                        monday: {
+                            breakfast: 'Paneer Paratha with Curd',
+                            lunch: 'Chicken Biryani with Raita',
+                            dinner: 'Dal Makhani with Butter Naan',
+                            snacks: 'Dry Fruit Milkshake, Samosa'
+                        },
+                        tuesday: {
+                            breakfast: 'Aloo Paratha with Butter',
+                            lunch: 'Mutton Curry with Jeera Rice',
+                            dinner: 'Chole Bhature',
+                            snacks: 'Banana Shake, Mixed Nuts'
+                        },
+                        wednesday: {
+                            breakfast: 'Stuffed Dosa with Ghee',
+                            lunch: 'Fish Curry with Rice',
+                            dinner: 'Butter Chicken with Naan',
+                            snacks: 'Mango Lassi, Vada'
+                        },
+                        thursday: {
+                            breakfast: 'Egg Bhurji with Pav',
+                            lunch: 'Mutton Biryani',
+                            dinner: 'Paneer Butter Masala with Roti',
+                            snacks: 'Peanut Butter Shake, Pakora'
+                        },
+                        friday: {
+                            breakfast: 'Cheese Dosa with Chutney',
+                            lunch: 'Chicken Curry with Pulao',
+                            dinner: 'Dal Tadka with Ghee Rice',
+                            snacks: 'Almond Milk, Kachori'
+                        },
+                        saturday: {
+                            breakfast: 'Mixed Paratha with Curd',
+                            lunch: 'Fish Fry with Rice',
+                            dinner: 'Malai Kofta with Naan',
+                            snacks: 'Chocolate Milkshake, Samosa'
+                        },
+                        sunday: {
+                            breakfast: 'Chhole Kulche',
+                            lunch: 'Hyderabadi Biryani',
+                            dinner: 'Butter Paneer with Tandoori Roti',
+                            snacks: 'Badam Milk, Mixed Pakoras'
+                        }
+                    },
+                    recommended: ['Ghee', 'Full-fat dairy', 'Protein-rich lentils', 'Nuts and dry fruits'],
+                    avoid: ['Low-fat foods', 'Skipping meals', 'Plain salads'],
+                    exercise: ['Weight training', 'Muscle building exercises', 'Limited cardio']
+                },
+                'Diabetic-Friendly': {
+                    calories: '1800-2200',
+                    meals: {
+                        breakfast: ['Steel-cut oats', 'Whole grain toast with eggs', 'Low-fat yogurt parfait'],
+                        lunch: ['Quinoa salad', 'Turkey lettuce wraps', 'Lentil soup'],
+                        dinner: ['Grilled fish', 'Chicken with vegetables', 'Bean bowl'],
+                        snacks: ['Apple with cheese', 'Mixed nuts', 'Vegetable sticks']
+                    },
+                    recommended: ['High-fiber foods', 'Lean proteins', 'Low-GI carbs', 'Healthy fats'],
+                    avoid: ['Refined sugars', 'White bread', 'Sugary drinks', 'Processed foods'],
+                    exercise: ['30 minutes walking daily', 'Light strength training', 'Swimming']
+                },
+                'Heart-Healthy': {
+                    calories: '2000-2200',
+                    meals: {
+                        breakfast: ['Overnight oats', 'Whole grain cereal', 'Fruit smoothie'],
+                        lunch: ['Mediterranean salad', 'Grilled fish tacos', 'Vegetable soup'],
+                        dinner: ['Baked salmon', 'Quinoa bowl', 'Lean chicken breast'],
+                        snacks: ['Nuts', 'Fresh fruits', 'Greek yogurt']
+                    },
+                    recommended: ['Omega-3 rich foods', 'Whole grains', 'Leafy greens', 'Berries'],
+                    avoid: ['Saturated fats', 'Salt', 'Processed meats', 'Fried foods'],
+                    exercise: ['Cardio 5x per week', 'Moderate intensity activities', 'Yoga']
+                },
+                'Vegan': {
+                    calories: '2000-2500',
+                    meals: {
+                        breakfast: ['Tofu scramble', 'Overnight oats', 'Smoothie bowl'],
+                        lunch: ['Buddha bowl', 'Chickpea curry', 'Quinoa salad'],
+                        dinner: ['Lentil pasta', 'Bean burrito', 'Tempeh stir-fry'],
+                        snacks: ['Hummus with vegetables', 'Trail mix', 'Energy balls']
+                    },
+                    recommended: ['Legumes', 'Nuts and seeds', 'Whole grains', 'Plant-based proteins'],
+                    avoid: ['Animal products', 'Hidden animal derivatives', 'Processed foods'],
+                    exercise: ['Mix of cardio and strength', 'Yoga', 'Pilates']
+                },
+                'Balanced Diet': {
+                    calories: '2000-2400',
+                    meals: {
+                        breakfast: ['Greek yogurt parfait', 'Whole grain pancakes', 'Veggie omelet'],
+                        lunch: ['Mixed green salad with protein', 'Whole grain sandwich', 'Buddha bowl'],
+                        dinner: ['Grilled fish with quinoa', 'Lean meat with roasted vegetables', 'Stir-fry with brown rice'],
+                        snacks: ['Mixed nuts', 'Fresh fruit with cheese', 'Whole grain crackers with hummus']
+                    },
+                    recommended: ['Colorful vegetables', 'Lean proteins', 'Whole grains', 'Healthy fats'],
+                    avoid: ['Excessive processed foods', 'Added sugars', 'Artificial ingredients'],
+                    exercise: ['30-60 minutes daily activity', 'Mix of cardio and strength', 'Regular stretching']
+                }
+            };
+            return plans[goal] || null;
+        }
+
+        function showDietPlanModal(goal, plan) {
+            // Create modal container
+            const modal = document.createElement('div');
+            modal.className = 'diet-plan-modal';
+            
+            // Create modal content
+            const content = `
+                <div class="modal-content">
+                    <h2>${goal} Weekly Plan</h2>
+                    <div class="plan-section">
+                        <h3>Daily Calorie Target: ${plan.calories} calories</h3>
+                        
+                        <h3>7-Day Meal Plan</h3>
+                        <div class="weekly-plan">
+                            ${Object.entries(plan.weeklyPlan).map(([day, meals]) => `
+                                <div class="day-plan">
+                                    <h4>${day.charAt(0).toUpperCase() + day.slice(1)}</h4>
+                                    <div class="meal-timeline">
+                                        <div class="meal-time">
+                                            <span class="time-icon">🌅</span>
+                                            <p><strong>Breakfast:</strong> ${meals.breakfast}</p>
+                                        </div>
+                                        <div class="meal-time">
+                                            <span class="time-icon">☀️</span>
+                                            <p><strong>Lunch:</strong> ${meals.lunch}</p>
+                                        </div>
+                                        <div class="meal-time">
+                                            <span class="time-icon">🌤️</span>
+                                            <p><strong>Snacks:</strong> ${meals.snacks}</p>
+                                        </div>
+                                        <div class="meal-time">
+                                            <span class="time-icon">🌙</span>
+                                            <p><strong>Dinner:</strong> ${meals.dinner}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="recommendations">
+                            <div class="foods-list">
+                                <h3>Recommended Foods</h3>
+                                <ul>${plan.recommended.map(food => `<li>${food}</li>`).join('')}</ul>
+                            </div>
+                            <div class="foods-list">
+                                <h3>Foods to Avoid</h3>
+                                <ul>${plan.avoid.map(food => `<li>${food}</li>`).join('')}</ul>
+                            </div>
+                        </div>
+
+                        <div class="exercise-tips">
+                            <h3>Exercise Recommendations</h3>
+                            <ul>${plan.exercise.map(tip => `<li>${tip}</li>`).join('')}</ul>
+                        </div>
+
+                        <div class="plan-actions">
+                            <button class="btn-primary" onclick="this.closest('.diet-plan-modal').remove()">Close</button>
+                            <button class="btn-primary" onclick="downloadWeeklyPlan('${goal}')">Download Plan</button>
+                            <button class="btn-primary" onclick="saveDietPlan('${goal}')">Save Plan</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.innerHTML = content;
+            document.body.appendChild(modal);
+        }
+
+        function saveDietPlan(goal) {
+            // Here you would typically save the plan to user's profile
+            alert(`${goal} plan has been saved to your profile!`);
+            document.querySelector('.diet-plan-modal').remove();
+        }
+
+        // Drag and Drop Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mealItems = document.querySelectorAll('.meal-item');
+            const mealSlots = document.querySelectorAll('.meal-slot');
+
+            mealItems.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+
+            mealSlots.forEach(slot => {
+                slot.addEventListener('dragover', handleDragOver);
+                slot.addEventListener('drop', handleDrop);
+                slot.addEventListener('dragenter', handleDragEnter);
+                slot.addEventListener('dragleave', handleDragLeave);
+            });
+        });
+
+        function handleDragStart(e) {
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.outerHTML);
+            e.dataTransfer.setData('calories', e.target.dataset.calories);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const dropZone = e.target.closest('.meal-slot');
+            if (!dropZone) return;
+
+            dropZone.classList.remove('drag-over');
+            const data = e.dataTransfer.getData('text/plain');
+            const calories = parseInt(e.dataTransfer.getData('calories'));
+            
+            // If there's already a meal item, ask for confirmation to replace
+            const existingMeal = dropZone.querySelector('.meal-item');
+            if (existingMeal) {
+                if (!confirm('Do you want to replace the existing meal?')) {
+                    return;
+                }
+                // Remove existing meal calories
+                updateCalories(-parseInt(existingMeal.dataset.calories));
+                existingMeal.remove();
+            } else {
+                // Clear the "Drop items here" text if it exists
+                const placeholder = dropZone.querySelector('div:not(.meal-slot-title)');
+                if (placeholder) {
+                    dropZone.removeChild(placeholder);
+                }
+            }
+
+            const mealElement = document.createElement('div');
+            mealElement.innerHTML = data;
+            const meal = mealElement.firstChild;
+            
+            // Add cancel button
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'cancel-meal-btn';
+            cancelBtn.innerHTML = '❌';
+            cancelBtn.title = 'Remove meal';
+            meal.appendChild(cancelBtn);
+            
+            dropZone.appendChild(meal);
+            updateCalories(calories);
+            
+            // Add remove functionality to cancel button
+            cancelBtn.addEventListener('click', function() {
+                const mealCalories = parseInt(meal.dataset.calories);
+                updateCalories(-mealCalories);
+                meal.remove();
+                if (dropZone.children.length === 1) { // Only title remains
+                    const placeholder = document.createElement('div');
+                    placeholder.textContent = `Drop ${dropZone.dataset.meal} items here`;
+                    dropZone.appendChild(placeholder);
+                }
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDragEnter(e) {
+            e.preventDefault();
+            e.target.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            e.target.classList.remove('drag-over');
+        }
+
+        function updateCalories(calories) {
+            totalCalories += calories;
+            document.getElementById('totalCalories').textContent = totalCalories;
+        }
+
+        // Meal Plan Actions
+        function savePlan() {
+            const mealPlan = {
+                breakfast: getMealFromSlot('breakfast'),
+                lunch: getMealFromSlot('lunch'),
+                snacks: getMealFromSlot('snacks'),
+                dinner: getMealFromSlot('dinner'),
+                totalCalories: totalCalories,
+                date: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            const savedPlans = JSON.parse(localStorage.getItem('mealPlans') || '[]');
+            savedPlans.push(mealPlan);
+            localStorage.setItem('mealPlans', JSON.stringify(savedPlans));
+            
+            alert('Meal plan saved successfully! 🎉\n\nYour personalized meal plan has been saved to your profile.');
+        }
+
+        function getMealFromSlot(mealType) {
+            const slot = document.querySelector(`.meal-slot[data-meal="${mealType}"]`);
+            const mealItem = slot.querySelector('.meal-item');
+            if (!mealItem) return null;
+            
+            return {
+                name: mealItem.querySelector('span:first-child').textContent,
+                calories: parseInt(mealItem.dataset.calories),
+                type: mealItem.dataset.type
+            };
+        }
+
+        function downloadPDF() {
+            const content = generatePDFContent();
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'meal-plan.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function generatePDFContent() {
+            let content = "Your Personalized Meal Plan\n";
+            content += "=========================\n\n";
+            content += `Date: ${new Date().toLocaleDateString()}\n`;
+            content += `Total Calories: ${totalCalories}\n\n`;
+
+            ['breakfast', 'lunch', 'snacks', 'dinner'].forEach(mealType => {
+                const meal = getMealFromSlot(mealType);
+                content += `${mealType.toUpperCase()}:\n`;
+                if (meal) {
+                    content += `- ${meal.name} (${meal.calories} calories)\n`;
+                } else {
+                    content += `- No meal selected\n`;
+                }
+                content += '\n';
+            });
+
+            return content;
+        }
+
+        // Carousel Navigation
+        function nextTip() {
+            const track = document.getElementById('carouselTrack');
+            const tips = track.children;
+            currentTipIndex = (currentTipIndex + 1) % tips.length;
+            track.style.transform = `translateX(-${currentTipIndex * 300}px)`;
+        }
+
+        function prevTip() {
+            const track = document.getElementById('carouselTrack');
+            const tips = track.children;
+            currentTipIndex = (currentTipIndex - 1 + tips.length) % tips.length;
+            track.style.transform = `translateX(-${currentTipIndex * 300}px)`;
+        }
+
+        // Auto-scroll tips
+        setInterval(nextTip, 5000);
+
+        // Save Tip
+        function saveTip(button) {
+            button.textContent = 'Saved! ✅';
+            button.disabled = true;
+            button.parentElement.classList.add('saved-tip');
+            
+            setTimeout(() => {
+                button.textContent = 'Save Tip';
+                button.disabled = false;
+                button.parentElement.classList.remove('saved-tip');
+            }, 2000);
+        }
+
+        // Chat Functionality
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                alert(`Message sent: "${message}"\n\nOur nutrition expert will respond shortly with personalized advice!`);
+                input.value = '';
+            }
+        }
+
+        function askQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+
+        // Help Button
+        function toggleHelp() {
+            alert('Help Center 🆘\n\n• Use the goal selector to choose your diet plan\n• Drag meals to create your daily plan\n• Browse tips for healthy living\n• Ask our expert any nutrition questions\n\nFor more help, contact support@dietcare.com');
+        }
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Enter key support for chat
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function downloadWeeklyPlan(goal) {
+            const plan = getDietPlan(goal);
+            let content = `${goal} Weekly Meal Plan\n`;
+            content += `===========================\n\n`;
+            content += `Daily Calorie Target: ${plan.calories} calories\n\n`;
+
+            Object.entries(plan.weeklyPlan).forEach(([day, meals]) => {
+                content += `${day.toUpperCase()}\n`;
+                content += `---------------------------\n`;
+                content += `Breakfast: ${meals.breakfast}\n`;
+                content += `Lunch: ${meals.lunch}\n`;
+                content += `Snacks: ${meals.snacks}\n`;
+                content += `Dinner: ${meals.dinner}\n\n`;
+            });
+
+            content += `\nRECOMMENDED FOODS:\n`;
+            content += `---------------------------\n`;
+            plan.recommended.forEach(food => content += `- ${food}\n`);
+
+            content += `\nFOODS TO AVOID:\n`;
+            content += `---------------------------\n`;
+            plan.avoid.forEach(food => content += `- ${food}\n`);
+
+            content += `\nEXERCISE RECOMMENDATIONS:\n`;
+            content += `---------------------------\n`;
+            plan.exercise.forEach(tip => content += `- ${tip}\n`);
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${goal.toLowerCase().replace(' ', '-')}-weekly-meal-plan.txt`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>

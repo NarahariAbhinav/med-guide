@@ -1,0 +1,872 @@
+/* ============================================= */
+/* ============== GLOBAL STYLES ================ */
+/* ============================================= */
+
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    background-image: url('/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #053B50;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================= */
+/* ============= NAVIGATION BAR ================ */
+/* ============================================= */
+
+nav {
+    background-color: #64CCC5;
+    color: #EEEEEE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2.5rem;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.5rem;
+    font-weight: 600;
+    gap: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: scale(1.02);
+}
+
+.brand-logo img {
+    height: 3rem;
+    width: auto;
+    object-fit: contain;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 1.75rem;
+    height: 1.25rem;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 100%;
+    height: 2px;
+    background-color: #EEEEEE;
+    transition: all 0.3s ease;
+}
+
+.menu-items {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.menu-items a {
+    color: #EEEEEE;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.menu-items a:hover {
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+.menu-items a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000000;
+    transition: width 0.3s ease;
+}
+
+.menu-items a:hover::after {
+    width: 100%;
+}
+
+/* ============================================= */
+/* ============= MAIN CONTENT ================== */
+/* ============================================= */
+
+main {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+/* ============================================= */
+/* ========== SYMPTOM CHECKER SECTION ========== */
+/* ============================================= */
+
+.symptom-checker-advanced {
+    background: linear-gradient(135deg, #e6f2ff 0%, #f0f9ff 100%);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin: 0 auto 3rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-width: 56.25rem;
+    border: 1px solid #d0e3ff;
+}
+
+.checker-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.checker-title {
+    color: #1a5f9c;
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.checker-subtitle {
+    color: #4a6f8a;
+    font-size: 1.05rem;
+    max-width: 43.75rem;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.checker-steps {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    flex: 1;
+}
+
+.step-number {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+    font-size: 1.1rem;
+}
+
+.step.active .step-number {
+    background-color: #1a5f9c;
+}
+
+.step-text {
+    font-size: 0.9rem;
+    color: #4a6f8a;
+    text-align: center;
+    max-width: 6.25rem;
+    font-weight: 500;
+}
+
+.step-line {
+    position: absolute;
+    top: 1.25rem;
+    left: 3.125rem;
+    right: 3.125rem;
+    height: 3px;
+    background-color: #d0e3ff;
+    z-index: 1;
+}
+
+.checker-content {
+    display: none;
+}
+
+.checker-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Step 1: Symptom Input */
+.symptom-input-section {
+    margin-bottom: 1.5rem;
+}
+
+.symptom-search-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+#symptom-search {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 1px solid #cce0ff;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+#symptom-search:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 2px 15px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+.symptom-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.symptom-tag {
+    background-color: #e6f2ff;
+    color: #1a5f9c;
+    padding: 0.5rem 1rem;
+    border-radius: 1.25rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.symptom-tag-remove {
+    margin-left: 0.5rem;
+    cursor: pointer;
+    color: #4a6f8a;
+    font-size: 0.8rem;
+    transition: color 0.2s ease;
+}
+
+.symptom-tag-remove:hover {
+    color: #e74c3c;
+}
+
+.symptom-suggestions {
+    position: absolute;
+    width: 100%;
+    max-height: 12.5rem;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.suggestion-item:hover {
+    background-color: #f5f9ff;
+}
+
+/* Step 2: Symptom Details */
+.symptom-details-container {
+    margin-top: 1.5rem;
+}
+
+.symptom-card {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid #4a90e2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.symptom-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.symptom-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.symptom-name {
+    font-weight: 600;
+    color: #1a5f9c;
+    font-size: 1.1rem;
+}
+
+.symptom-remove {
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+
+.symptom-remove:hover {
+    transform: scale(1.1);
+}
+
+.detail-item {
+    margin-bottom: 0.75rem;
+}
+
+.detail-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a6f8a;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.detail-controls {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+    accent-color: #4a90e2;
+    cursor: pointer;
+}
+
+/* Step 3: Results */
+.results-container {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.results-title {
+    color: #1a5f9c;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.results-subtitle {
+    color: #4a6f8a;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.condition-card {
+    background: #f9fbfe;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid #4a90e2;
+}
+
+.condition-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.condition-name {
+    font-weight: 700;
+    color: #1a5f9c;
+    font-size: 1.1rem;
+}
+
+.condition-probability {
+    background-color: #e6f2ff;
+    color: #1a5f9c;
+    padding: 0.2rem 0.75rem;
+    border-radius: 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.condition-details {
+    margin-top: 0.75rem;
+}
+
+.condition-description {
+    color: #4a6f8a;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.condition-symptoms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+}
+
+.condition-symptom {
+    background-color: #e6f2ff;
+    color: #1a5f9c;
+    padding: 0.3rem 0.75rem;
+    border-radius: 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.condition-matches {
+    color: #4CAF50;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.condition-matches i {
+    margin-right: 0.5rem;
+}
+
+.condition-missing {
+    color: #ff9800;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.condition-missing i {
+    margin-right: 0.5rem;
+}
+
+.recommendation-card {
+    background: #fff9f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-left: 3px solid #ff9800;
+}
+
+.recommendation-title {
+    font-weight: 700;
+    color: #e67e22;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.recommendation-text {
+    color: #8a6d4a;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.warning-card {
+    background: #fff0f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    border-left: 3px solid #e74c3c;
+}
+
+.warning-title {
+    font-weight: 700;
+    color: #e74c3c;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.warning-text {
+    color: #8a4a4a;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Navigation Buttons */
+.checker-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.nav-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.button-back {
+    background-color: #f5f5f5;
+    color: #4a6f8a;
+}
+
+.button-back:hover {
+    background-color: #e0e0e0;
+    transform: translateX(-3px);
+}
+
+.button-next {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.button-next:hover {
+    background-color: #3a7bc8;
+    transform: translateX(3px);
+}
+
+.button-submit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.button-submit:hover {
+    background-color: #3d8b40;
+    transform: scale(1.05);
+}
+
+/* ============================================= */
+/* ============= BOXES CONTAINER =============== */
+/* ============================================= */
+
+.boxes-container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.big-box {
+    width: 100%;
+    height: 9.375rem;
+    background-color: #1BBEF1;
+    margin: 2.5rem auto;
+    font-size: 2.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    line-height: 9.375rem;
+    border-radius: 0.625rem;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.big-box:hover {
+    transform: translateY(-3px);
+}
+
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1.25rem;
+}
+
+.box {
+    width: 15.625rem;
+    height: 15.625rem;
+    background-color: #f4f4f4;
+    text-align: center;
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.box:hover img {
+    transform: scale(1.05);
+}
+
+.box-name {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.75rem 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: 600;
+    color: #053B50;
+}
+
+.box:hover .box-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================= */
+/* ================= FOOTER ==================== */
+/* ============================================= */
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links {
+    margin-bottom: 1.25rem;
+}
+
+.footer-links h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.footer-links ul {
+    list-style-type: none;
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #64CCC5;
+    text-decoration: underline;
+}
+
+.social-icons {
+    margin-bottom: 1.25rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #64CCC5;
+    transform: translateY(-3px);
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: #ccc;
+    margin-top: 0.5rem;
+}
+
+/* ============================================= */
+/* ============ RESPONSIVE STYLES ============== */
+/* ============================================= */
+
+@media screen and (max-width: 75rem) {
+    .boxes-container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 62rem) {
+    .boxes-container {
+        width: 90%;
+    }
+    
+    .symptom-checker-advanced {
+        margin: 0 1.5rem 3rem;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 48rem) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+
+    .menu-items {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #176B87;
+        padding: 1rem 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-items.active {
+        display: flex;
+    }
+    
+    .checker-steps {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .step {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .step-line {
+        display: none;
+    }
+    
+    .step-text {
+        text-align: left;
+        max-width: none;
+    }
+    
+    .checker-title {
+        font-size: 1.5rem;
+    }
+    
+    .nav-button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .boxes-container {
+        width: 95%;
+    }
+    
+    .big-box {
+        height: 7rem;
+        line-height: 7rem;
+        font-size: 2rem;
+        margin: 1.5rem auto;
+    }
+    
+    .boxes {
+        gap: 1.5rem;
+    }
+    
+    .box {
+        width: 12rem;
+        height: 12rem;
+    }
+}
+
+@media screen and (max-width: 36rem) {
+    .big-box {
+        height: 6rem;
+        line-height: 6rem;
+        font-size: 1.75rem;
+    }
+    
+    .box {
+        width: 10rem;
+        height: 10rem;
+    }
+    
+    .footer-links ul {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

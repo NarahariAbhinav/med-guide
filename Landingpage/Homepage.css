@@ -1,0 +1,312 @@
+/* Reset default margin and padding */
+body, h1, h2, p, ul, li, a, button {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 100%;
+    line-height: 1.6;
+    background-image: url('/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #053B50;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Navbar styles */
+nav {
+    background-color: #64CCC5;
+    color: #EEEEEE;
+    display: flex;
+    max-width: 100%; /* Set max-width to ensure it fits within the screen */
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px; /* Increase padding for height */
+    position: relative;
+    line-height: 2; /* Increase line height for centering */
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.5em; /* Increase font size for logo name */
+}
+
+.brand-logo img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.line {
+    width: 100%;
+    height: 2px;
+    background-color: #EEEEEE;
+}
+
+.menu-items {
+    display: flex;
+}
+
+.menu-items a {
+    margin-right: 50px;
+    color: #EEEEEE;
+    text-decoration: none;
+    font-size: 1.2em; /* Increase font size for menu items */
+    transition: all 0.3s; /* Add smooth transition for all properties */
+}
+
+.menu-items a:hover {
+    color: #000000; /* Change text color on hover */
+    transform: scale(1.1); /* Scale up the text on hover */
+}
+
+header {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 20px 0;
+    font-family: 'Great Vibes', cursive; 
+}
+
+h1 {
+    font-size: 3em; /* Adjust the font size as needed */
+    animation: zoomIn 1s forwards;
+}
+
+.tagline {
+    font-style: italic;
+    color: #64CCC5;
+    font-size: 1.5em; /* Adjust the font size as needed */
+    animation: zoomIn 2s forwards;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.health-insights {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.health-insights h2 {
+    font-size: 2em;
+    color: #176B87;
+    margin-bottom: 20px;
+}
+
+.insights-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.insight {
+    width: 350px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.insight img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.insight p {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.5;
+}
+
+.insight:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.services {
+    text-align: center;
+    padding: 10px;
+}
+
+.tiles {
+    font-size: 0;
+    text-align: center; /* Center align the tiles */
+    margin-top: 20px; /* Add margin to separate from the heading */
+}
+
+.tile {
+    display: inline-block; /* Display tiles in a line */
+    margin: 10px;
+    text-align: left;
+    opacity: .99;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.tile:before {
+    content: '';
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgb(17, 172, 162) 100%);
+    width: 100%;
+    height: 50%;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    transition-property: top, opacity;
+    transition-duration: 0.3s;
+}
+
+.tile img {
+    display: block;
+    width: 250px; /* Adjust the max-width as needed */
+    height: 250px;
+    backface-visibility: hidden;
+}
+.tile .details {
+    font-size: 16px;
+    padding: 20px;
+    color: #053B50;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+}
+
+.tile .details span {
+    display: block;
+    opacity: 0;
+    position: relative;
+    top: 100px;
+    transition-property: top, opacity;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+.tile:focus:before,
+.tile:focus span, 
+.tile:hover:before,
+.tile:hover span {
+    opacity: 1;
+}
+
+.tile:focus:before, 
+.tile:hover:before {
+    top: 50%;
+}
+
+.tile:focus span, 
+.tile:hover span {
+    top: 0;
+}
+
+.tile:focus .title, 
+.tile:hover .title {
+    transition-delay: 0.15s;
+}
+
+.tile:focus .info, 
+.tile:hover .info {
+    transition-delay: 0.25s;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 5px 0; /* Reduce the padding to reduce the height */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+footer ul li {
+    display: inline;
+    margin-right: 15px;
+}
+footer ul li a {
+    color: white;
+    text-decoration: none;
+}
+.social-icons {
+    margin-bottom: 10px;
+}
+.social-icon {
+    color: white;
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+.social-icon:hover {
+    color: lightblue;
+}
+.footer-copyright {
+    font-size: 0.8em;
+}
+
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .menu-items {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #176B87;
+        padding: 10px 0;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-items a {
+        margin: 10px 0;
+    }
+
+    .menu-items.active {
+        display: flex;
+    }
+
+    .content {
+        padding-top: 100px;
+    }
+}
